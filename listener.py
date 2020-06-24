@@ -109,7 +109,7 @@ class MVListener(BaseListener):
     def on_message(self, headers, messages):
         logger.info(headers)
         for message in json.loads(messages):
-            if view:
+            if self.view:
                 print(message['body'])
             else:
                 self._insert_message(message['body'])
@@ -156,8 +156,9 @@ class VSTPListener(BaseListener):
             print(data['VSTPCIFMsgV1']['schedule'])
         else:
             self._insert_message(data['VSTPCIFMsgV1']['schedule'])
+            
 
- class TDListener(BaseListener):
+class TDListener(BaseListener):
     """
     Make a Listener for train describer (TD) Feeds.
     """

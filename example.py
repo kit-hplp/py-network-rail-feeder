@@ -12,9 +12,10 @@ from datafeeder import RailDataFeeder
 pd.options.display.max_columns = None
 
 # Set up the personal information for the data feeds
-USERNAME = 'XXXXXX'
-PASSWORD = 'XXXXXX'
+USERNAME = 'KElliott@hartreepartners.com'
+PASSWORD = 'a122a2dd-f9fa-4b9c-a65f-be4e62578b71'
 
+PASSWORD = 'uv"<X5&U6&;ZmaVm'
 # four topics to choose from - 1. MVT 2. PPM 3. VSTP 4. TD
 TOPIC = "MVT"
 
@@ -32,4 +33,13 @@ train_rdf = RailDataFeeder(
 train_rdf.download_feed()
 
 # convert to dataframe
-train_rdf.to_pandas()
+df = train_rdf.to_pandas()
+
+
+HOSTNAME = "datafeeds.networkrail.co.uk"
+conn = stomp.Connection(host_and_ports=[(HOSTNAME, 61618)])
+#conn.set_listener('listener', listener(msger, view))
+conn.start()
+conn.connect(username=USERNAME, passcode=PASSWORD)
+
+conn.subscribe(destination=f"/topic/MVT", id=1, ack='auto')

@@ -77,6 +77,7 @@ class RailDataFeeder:
 
         while True:
             try:
+                print('Polled.')
                 time.sleep(1)
             except KeyboardInterrupt:
                 logger.info("Quit saving data to table and disable the connection with data feed!")
